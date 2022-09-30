@@ -22,15 +22,15 @@ public class CalendarPage extends BasePage {
     public  WebElement endDateCalendar;
 
     @FindBy(xpath = "//button[text()='Submit']")
-    public WebElement submitButton;
+    public WebElement submitBtn;
 
     @FindBy(xpath = "//div[@class='react-datepicker__input-container']/input")
-    public WebElement startDateText;
+    public WebElement startDateTxt;
 
     @FindBy(xpath = "(//div[@class='react-datepicker__input-container'])[2]/input")
-    public WebElement endDateText;
+    public WebElement endDateTxt;
 
     @FindBy(id = "num-days")
-    public WebElement actualDaysText;
+    public WebElement numberOfDaysTxt;
 
 }
