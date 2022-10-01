@@ -9,16 +9,20 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.UserMgtPage;
+
 import java.util.List;
 import java.util.Set;
 
 
 public class UserMgtTest extends BaseTest {
 
+    private UserMgtPage page;
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         super.setUp();
         driver.findElement(By.xpath("//nav/a[text()='User-Mgt']")).click();
+        page = new UserMgtPage(driver);
     }
 
     @Test(testName = "US1010: Staging table view", dataProvider = "roles", dataProviderClass = DataProviders.class)
@@ -29,14 +33,25 @@ public class UserMgtTest extends BaseTest {
         String phone = faker.phoneNumber().cellPhone();
         String email = faker.internet().emailAddress();
 
-        driver.findElement(By.id("Firstname")).sendKeys(firstName);
-        driver.findElement(By.id("Lastname")).sendKeys(lastName);
-        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
-        driver.findElement(By.id("Email")).sendKeys(email);
+        //version 1
+//        driver.findElement(By.id("Firstname")).sendKeys(firstName);
+//        driver.findElement(By.id("Lastname")).sendKeys(lastName);
+//        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
+//        driver.findElement(By.id("Email")).sendKeys(email);
+//        driver.findElement(By.id("Select-role")).sendKeys(role);
+//        driver.findElement(By.id("submit-btn")).click();
+//        driver.findElement(By.id("submit-btn")).click();
 
-        Select select = new Select(driver.findElement(By.id("Select-role")));
-        select.selectByVisibleText(role);
-        driver.findElement(By.id("submit-btn")).click();
+        //version 2
+//        page.firstNameInput.sendKeys(firstName);
+//        page.lastNameInput.sendKeys(lastName);
+//        page.phoneNumberInput.sendKeys(phone);
+//        page.emailInput.sendKeys(email);
+//        page.roleInput.sendKeys(role);
+//        page.submitBtn.click();
+
+        //version 3
+        page.addNewUser(firstName, lastName, phone, email, role);
 
         Assert.assertEquals(driver.findElement(By.xpath("//td[1]")).getText(), firstName);
         Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(), lastName);
@@ -54,14 +69,7 @@ public class UserMgtTest extends BaseTest {
         String email = faker.internet().emailAddress();
 
         //adding user to the table
-        driver.findElement(By.id("Firstname")).sendKeys(firstName);
-        driver.findElement(By.id("Lastname")).sendKeys(lastName);
-        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
-        driver.findElement(By.id("Email")).sendKeys(email);
-
-        Select select = new Select(driver.findElement(By.id("Select-role")));
-        select.selectByVisibleText(role);
-        driver.findElement(By.id("submit-btn")).click();
+        page.addNewUser(firstName, lastName, phone, email, role);
 
         //accessing db page
         driver.findElement(By.id("access-db-btn")).click();
@@ -85,14 +93,7 @@ public class UserMgtTest extends BaseTest {
         String phone = faker.phoneNumber().cellPhone();
         String email = faker.internet().emailAddress();
 
-        driver.findElement(By.id("Firstname")).sendKeys(firstName);
-        driver.findElement(By.id("Lastname")).sendKeys(lastName);
-        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
-        driver.findElement(By.id("Email")).sendKeys(email);
-
-        Select select = new Select(driver.findElement(By.id("Select-role")));
-        select.selectByVisibleText(role);
-        driver.findElement(By.id("submit-btn")).click();
+        page.addNewUser(firstName, lastName, phone, email, role);
 
         Assert.assertEquals(driver.findElement(By.xpath("//td[1]")).getText(), firstName);
         Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(), lastName);
@@ -115,16 +116,7 @@ public class UserMgtTest extends BaseTest {
         String email = faker.internet().emailAddress();
 
         //input user info
-        driver.findElement(By.id("Firstname")).sendKeys(firstName);
-        driver.findElement(By.id("Lastname")).sendKeys(lastName);
-        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
-        driver.findElement(By.id("Email")).sendKeys(email);
-
-        Select select = new Select(driver.findElement(By.id("Select-role")));
-        select.selectByVisibleText(role);
-
-        //submit to db access
-        driver.findElement(By.id("submit-btn")).click();
+        page.addNewUser(firstName, lastName, phone, email, role);
 
         driver.findElement(By.id("submit-table-btn")).click();
 
