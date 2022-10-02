@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class UserMgtPage extends BasePage {
 
 
@@ -32,6 +34,13 @@ public class UserMgtPage extends BasePage {
 
     @FindBy(id = "submit-btn")
     public WebElement submitBtn;
+
+    @FindBy(id = "submit-table-btn")
+    public WebElement submitTableBtn;
+
+    @FindBy(id = "access-db-btn")
+    public WebElement accessDbBtn;
+
 
     public void addNewUser(String firstName, String lastName, String phone, String email, String role){
         firstNameInput.sendKeys(firstName);

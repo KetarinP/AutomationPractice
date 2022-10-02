@@ -123,4 +123,5 @@ public class UserMgtTest extends BaseTest {
         List<WebElement> userInfo = driver.findElements(By.xpath("//tbody/tr"));
         Assert.assertEquals(userInfo.size(), 0);
     }
+
 }
