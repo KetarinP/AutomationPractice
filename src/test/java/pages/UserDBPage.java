@@ -14,8 +14,6 @@ public class UserDBPage{
             PageFactory.initElements(driver, this);
         }
 
-    @FindBy(id = "access-db-btn")
-    public WebElement accessDbBtn;
     @FindBy(xpath = "//td[1]")
     public List<WebElement> firstNames;
 

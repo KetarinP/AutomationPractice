@@ -15,7 +15,6 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         initializeDriver("chrome");
-        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://automation.techleadacademy.io/#/home");
