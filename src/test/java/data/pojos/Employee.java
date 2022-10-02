@@ -2,9 +2,9 @@ package data.pojos;
 
 public class Employee {
 
-    String name;
-    int id;
-    String department;
+    private String name;
+    private int id;
+    private String department;
 
     public Employee(String name, int id, String department) {
         this.name = name;

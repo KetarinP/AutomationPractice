@@ -3,6 +3,7 @@ package tests;
 import base.BaseTest;
 import com.github.javafaker.Faker;
 import data.DataProviders;
+import data.pojos.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -10,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.UserMgtPage;
+import utils.BrowserUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -63,25 +65,21 @@ public class UserMgtTest extends BaseTest {
     public void test02(String role) {
         //creating a test user
         Faker faker = new Faker();
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String phone = faker.phoneNumber().cellPhone();
-        String email = faker.internet().emailAddress();
+
+        User user = new User(faker.name().firstName(), faker.name().lastName(), faker.phoneNumber().cellPhone(), faker.internet().emailAddress(), role);
 
         //adding user to the table
-        page.addNewUser(firstName, lastName, phone, email, role);
+        //page.addNewUser(firstName, lastName, phone, email, role);
+        page.addNewUser(user.getFirstName(), user.getLastName(), user.getPhone(), user.getEmail(), user.getRole());
 
         //accessing db page
         driver.findElement(By.id("access-db-btn")).click();
 
         //switch to db window
-        Set<String> allWindowHandles = driver.getWindowHandles();
-        for(String each: allWindowHandles){
-            if (!each.equals(driver.getWindowHandles()))
-                driver.switchTo().window(each);
-        }
+        BrowserUtils.switchToNewWindow(driver);
+
         //validating user email doesn't exist
-        String xpat = "//td[text='" + email + "']";
+        String xpat = "//td[text='" + user.getEmail() + "']";
         List<WebElement> elementList = driver.findElements(By.xpath(xpat));
         Assert.assertEquals(elementList.size(), 0);
     }
