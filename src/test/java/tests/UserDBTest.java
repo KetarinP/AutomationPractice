@@ -1,6 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import com.github.javafaker.Faker;
+import data.DataProviders;
+import data.pojos.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -21,14 +24,16 @@ public class UserDBTest extends BaseTest {
         driver.findElement(By.xpath("//nav/a[text()='User-Mgt']")).click();
         userMgtPage = new UserMgtPage(driver);
         page = new UserDBPage(driver);
-        userMgtPage.accessDbBtn.click();
-
-        //switching windows
-        BrowserUtils.switchToNewWindow(driver);
     }
 
     @Test(testName = "US2003 - New user's password format")
     public void test01(){
+
+        //click access DB button
+        userMgtPage.accessDbBtn.click();
+
+        //switch page
+        BrowserUtils.switchToNewWindow(driver);
         //2. capture first, last and password - done in page class
 
         //3. validate format is as expected
@@ -43,6 +48,28 @@ public class UserDBTest extends BaseTest {
         String expectedPassword3 = page.firstNames.get(lastIndex).getText() + "." + page.lastNames.get(lastIndex).getText() + "$";
         Assert.assertEquals(page.passwords.get(lastIndex).getText(), expectedPassword3.toLowerCase());
 
+
+    } @Test(testName = "US2004 - New user's password format")
+    public void testPasswordFormat() {
+
+        User user = new User("Super", "Man", "333-222-1111",
+                "super.man@test.com", "Student");
+        //adding user to the table
+        userMgtPage.addNewUser(user.getFirstName(), user.getLastName(), user.getPhone(), user.getEmail(), user.getRole());
+
+        //submit table
+        userMgtPage.submitTableBtn.click();
+
+        //accessing db page
+        userMgtPage.accessDbBtn.click();
+
+        //switch to db window
+        BrowserUtils.switchToNewWindow(driver);
+
+        //compare password format
+        String expectedPassword = user.getFirstName() + "." + user.getLastName() + "$";
+        String actual = page.passwords.get(page.passwords.size() - 1).getText();
+        Assert.assertEquals(actual, expectedPassword.toLowerCase());
 
     }
 

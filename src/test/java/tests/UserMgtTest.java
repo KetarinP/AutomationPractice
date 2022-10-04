@@ -122,43 +122,4 @@ public class UserMgtTest extends BaseTest {
         Assert.assertEquals(userInfo.size(), 0);
     }
 
-    @Test(testName = "US2004 - New user's password format", dataProvider = "roles", dataProviderClass = DataProviders.class)
-    public void testPasswordFormat(String role) {
-        //creating a test user
-        Faker faker = new Faker();
-
-        User user = new User(faker.name().firstName(), faker.name().lastName(), faker.phoneNumber().cellPhone(), faker.internet().emailAddress(), role);
-
-        //adding user to the table
-        page.addNewUser(user.getFirstName(), user.getLastName(), user.getPhone(), user.getEmail(), user.getRole());
-
-        //click submit user info
-        page.submitBtn.click();
-
-        //submit table
-        page.submitTableBtn.click();
-
-        //accessing db page
-        page.accessDbBtn.click();
-
-        //switch to db window
-        BrowserUtils.switchToNewWindow(driver);
-
-        String searchEmails = user.getEmail();
-
-        //loop through emails to search for input emaails
-        for(int i = 0; i < page.emails.size(); i++) {
-
-                if(searchEmails.equals(page.emails.get(i).getText())) {
-
-                Assert.assertTrue(true);
-
-                Assert.assertEquals(page.passwords.get(i).getText(), user.getFirstName().toLowerCase()
-                                    + "." + user.getLastName().toLowerCase() + "$");
-                break;
-            }
-        }
-
-    }
-
 }
