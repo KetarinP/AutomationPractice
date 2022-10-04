@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class UserMgtPage extends BasePage {
 
 
@@ -37,6 +39,12 @@ public class UserMgtPage extends BasePage {
 
     @FindBy(id = "access-db-btn")
     public WebElement accessDbBtn;
+
+    @FindBy(xpath = "//td[5]")
+    public List<WebElement> emails;
+
+    @FindBy(xpath = "//td[6]")
+    public List<WebElement> passwords;
 
 
     public void addNewUser(String firstName, String lastName, String phone, String email, String role){

@@ -42,7 +42,8 @@ public class UserDBTest extends BaseTest {
         int lastIndex = page.firstNames.size() - 1;
         String expectedPassword3 = page.firstNames.get(lastIndex).getText() + "." + page.lastNames.get(lastIndex).getText() + "$";
         Assert.assertEquals(page.passwords.get(lastIndex).getText(), expectedPassword3.toLowerCase());
-    }
 
+
+    }
 
 }

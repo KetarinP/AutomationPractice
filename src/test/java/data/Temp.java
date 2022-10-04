@@ -1,5 +1,4 @@
 package data;
-
 import utils.ConfigReader;
 
 public class Temp {

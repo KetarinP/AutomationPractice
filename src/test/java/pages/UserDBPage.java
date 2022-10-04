@@ -22,4 +22,7 @@ public class UserDBPage{
 
     @FindBy(xpath = "//td[6]")
     public List<WebElement> passwords;
+
+    @FindBy(xpath = "//td[5]")
+    public List<WebElement> emails;
 }
