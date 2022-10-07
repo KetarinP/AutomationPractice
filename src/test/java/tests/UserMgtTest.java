@@ -22,7 +22,6 @@ public class UserMgtTest extends BaseTest {
     private UserMgtPage page;
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        super.setUp();
         driver.findElement(By.xpath("//nav/a[text()='User-Mgt']")).click();
         page = new UserMgtPage(driver);
     }

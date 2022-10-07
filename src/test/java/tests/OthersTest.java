@@ -16,7 +16,6 @@ public class OthersTest  extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        super.setUp();
         driver.findElement(By.xpath("//nav/a[text()='Others']")).click();
         page = new OthersPage(driver);
     }

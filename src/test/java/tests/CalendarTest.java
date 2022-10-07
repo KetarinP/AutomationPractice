@@ -13,7 +13,6 @@ public class CalendarTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(){
-        super.setUp();
         driver.findElement(By.xpath("//nav/a[text()='Calendar']")).click();
         calendarPage = new CalendarPage(driver);
     }

@@ -18,8 +18,6 @@ public class UserDBTest extends BaseTest {
 
     @BeforeMethod
     public void setUp(){
-        super.setUp();
-
         //1. open db page
         driver.findElement(By.xpath("//nav/a[text()='User-Mgt']")).click();
         userMgtPage = new UserMgtPage(driver);
