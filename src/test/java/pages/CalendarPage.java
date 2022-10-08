@@ -18,7 +18,7 @@ public class CalendarPage extends BasePage {
     @FindBy(xpath = "(//div[@class='react-datepicker__input-container'])[2]")
     public WebElement endDateInput;
 
-    @FindBy(xpath = "//div[contains(@class, 'keyboard-selected')]/following-sibling::div")
+    @FindBy(xpath = "//div[contains(@class, 'keyboard-selected')]/following::div[contains(@class, 'react-datepicker__day')]")
     public  WebElement endDateCalendar;
 
     @FindBy(xpath = "//button[text()='Submit']")
